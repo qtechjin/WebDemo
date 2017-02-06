@@ -1,5 +1,7 @@
 package com.ustcjin.servlet;
 
+import com.ustcjin.domain.User;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,12 +16,20 @@ public class SubmitBack extends javax.servlet.http.HttpServlet {
         response.setContentType("text/html;charset=utf-8");
         request.setCharacterEncoding("utf-8");
         PrintWriter out = response.getWriter();
+        String name = request.getParameter("name");
         String gender = request.getParameter("gender");
         out.println("你选择的是:" + gender);
 
-        request.setAttribute("name", gender);
+        User user = (User)getServletContext().getAttribute("user");
         String context = request.getContextPath().toString();
+
+        String email = getServletContext().getInitParameter("email");
+
+        request.setAttribute("name", name);
+        request.setAttribute("gender", gender);
+        request.setAttribute("user", user);
         request.setAttribute("context", context);
+        request.setAttribute("email", email);
         RequestDispatcher view = request.getRequestDispatcher("/jsp/result.jsp");
         view.forward(request, response);
     }

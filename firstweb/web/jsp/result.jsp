@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.ustcjin.domain.User" %><%--
   Created by IntelliJ IDEA.
   User: mi
   Date: 2017/1/23
@@ -13,5 +13,9 @@
 <body>
     你的选择是 <%= request.getAttribute("name")%><br>
     <%= request.getAttribute("context")%>
+    <%= request.getAttribute("email")%><br>
+    <%= ((User)request.getAttribute("user")).getName()%><br>
+    <%= ((User)request.getAttribute("user")).getGender()%>
+
 </body>
 </html>
